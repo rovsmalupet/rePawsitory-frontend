@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Heart, FileText, Users, AlertTriangle, Settings } from 'lucide-react';
 import ViewRecordModal from '../components/ViewRecordModal';
+import API_URL from '../config';
 
 const DashboardPage = ({ userRole, pets, recentRecords, petsLoading, petsError, setCurrentPage }) => {
   const [profileComplete, setProfileComplete] = useState(true); // Default to true to avoid showing warning before check
@@ -13,7 +14,7 @@ const DashboardPage = ({ userRole, pets, recentRecords, petsLoading, petsError, 
     const checkProfileCompletion = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5001/api/profile', {
+        const response = await fetch(`${API_URL}/api/profile`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -52,7 +53,7 @@ const DashboardPage = ({ userRole, pets, recentRecords, petsLoading, petsError, 
       try {
         const token = localStorage.getItem('token');
         const recordsPromises = pets.map(pet =>
-          fetch(`http://localhost:5001/api/pets/${pet._id}/medical-records`, {
+          fetch(`${API_URL}/api/pets/${pet._id}/medical-records`, {
             headers: { 'Authorization': `Bearer ${token}` }
           }).then(res => res.ok ? res.json() : [])
             .then(records => records.map(r => ({ ...r, petName: pet.name, petId: pet._id })))

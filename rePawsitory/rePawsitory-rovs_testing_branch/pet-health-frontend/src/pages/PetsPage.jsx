@@ -4,6 +4,7 @@ import AddPetModal from '../components/AddPetModal';
 import EditPetModal from '../components/EditPetModal';
 import PetRecordsPage from './PetRecordsPage';
 import { useNavigation } from '../hooks/useNavigation';
+import API_URL from '../config';
 
 const PetsPage = ({ pets, petsLoading, petsError, addPet, refetchPets }) => {
   const { navigateTo } = useNavigation();
@@ -19,7 +20,7 @@ const PetsPage = ({ pets, petsLoading, petsError, addPet, refetchPets }) => {
     const checkProfileCompletion = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5001/api/profile', {
+        const response = await fetch(`${API_URL}/api/profile`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -162,7 +163,7 @@ const PetsPage = ({ pets, petsLoading, petsError, addPet, refetchPets }) => {
             <div className="bg-gradient-to-br from-blue-400 to-blue-600 aspect-square flex items-center justify-center overflow-hidden relative">
               {pet.photoUrl ? (
                 <img 
-                  src={`http://localhost:5001${pet.photoUrl}`}
+                  src={`${API_URL}${pet.photoUrl}`}
                   alt={pet.name} 
                   className="w-full h-full object-cover"
                 />
