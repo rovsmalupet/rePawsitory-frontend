@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, FileText, Users, Bell, AlertTriangle, Settings } from 'lucide-react';
+import { Heart, FileText, Users, AlertTriangle, Settings } from 'lucide-react';
 import ViewRecordModal from '../components/ViewRecordModal';
 
 const DashboardPage = ({ userRole, pets, recentRecords, petsLoading, petsError, setCurrentPage }) => {
